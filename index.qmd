@@ -4,6 +4,7 @@ website:
   comments:
     utterances:
       repo: quarto-dev/quarto-web
+  output-dir: docs
 ---
 
 ## SUMMARY
