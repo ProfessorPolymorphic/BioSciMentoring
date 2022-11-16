@@ -1,10 +1,6 @@
 ---
-website:
-  title: "BIOLOGICAL SCIENCES // MENTORING"
-  comments:
-    utterances:
-      repo: quarto-dev/quarto-web
-  output-dir: docs
+title: "BIOLOGICAL SCIENCES // MENTORING"
+  
 ---
 
 ## SUMMARY
