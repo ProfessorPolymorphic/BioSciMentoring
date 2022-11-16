@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -58,6 +121,8 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -256,6 +321,256 @@ ul.task-list li input[type="checkbox"] {
 <li>Ranked Choice. This could be combined with option 1, but is probably a fair amount of work to set up.</li>
 </ol>
 <p>There are some visualizations and online tools that could use the data from option 1 to help us understand our department and our students. They also might make it easier for students to find undergraduate research mentors. They also might make our department look cool when we try to recruit students.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" data-startfrom="166" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 165;"><span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> d3<span class="op">.</span><span class="fu">scalePoint</span>(attributes<span class="op">,</span> [margin<span class="op">.</span><span class="at">left</span><span class="op">,</span> width <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span>])</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> {</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> scales <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()<span class="op">;</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>  attributes<span class="op">.</span><span class="fu">forEach</span>(<span class="kw">function</span>(attribute) {</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>    <span class="co">//only attribute origin is ordinal data and needs a different scale</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (attribute <span class="op">==</span> <span class="st">"origin"</span>){</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>      scales<span class="op">.</span><span class="fu">set</span>(</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>        attribute<span class="op">,</span></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>        <span class="co">//https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>        <span class="co">//d3.extent gets min and max value of the given attribute </span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>        <span class="co">//3 attributes for origin so axis needs to be cut in half</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>        d3<span class="op">.</span><span class="fu">scaleOrdinal</span>()<span class="op">.</span><span class="fu">range</span>([height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span><span class="op">,</span> height<span class="op">/</span><span class="dv">2</span><span class="op">,</span> margin<span class="op">.</span><span class="at">top</span>])</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">domain</span>(d3<span class="op">.</span><span class="fu">extent</span>(data<span class="op">,</span> item <span class="kw">=&gt;</span> item[attribute]))</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {</span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>      scales<span class="op">.</span><span class="fu">set</span>(</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>        attribute<span class="op">,</span></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>        <span class="co">//d3.extent gets min and max value of the given attribute </span></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>        d3<span class="op">.</span><span class="fu">scaleLinear</span>()<span class="op">.</span><span class="fu">range</span>([height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span><span class="op">,</span> margin<span class="op">.</span><span class="at">top</span>])</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">domain</span>(d3<span class="op">.</span><span class="fu">extent</span>(data<span class="op">,</span> item <span class="kw">=&gt;</span> item[attribute]))</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>    }      </span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> scales<span class="op">;</span></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>viewof colorAttribute <span class="op">=</span> <span class="fu">select</span>({</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span><span class="op">:</span> <span class="st">"Color Attribute"</span><span class="op">,</span></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>  <span class="dt">description</span><span class="op">:</span> <span class="st">"Pick an attribute for coloring the polylines."</span><span class="op">,</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>  <span class="dt">options</span><span class="op">:</span> attributes<span class="op">,</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"origin"</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a><span class="co">//https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix</span></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleOrdinal</span>(d3<span class="op">.</span><span class="at">schemeTableau10</span>)</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>paracoords <span class="op">=</span> {</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svg <span class="op">=</span> d3<span class="op">.</span><span class="fu">create</span>(<span class="st">"svg"</span>)<span class="op">.</span><span class="fu">attr</span>(<span class="st">"viewBox"</span><span class="op">,</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> width<span class="op">,</span> height])<span class="op">;</span></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>  <span class="co">// set the style of hidden data items</span></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>  svg</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">append</span>(<span class="st">"style"</span>)</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">text</span>(<span class="st">"path.hidden { stroke: #000; stroke-opacity: 0.01;}"</span>)<span class="op">;</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>  <span class="co">// a map that holds any active brush per attribute</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> activeBrushes <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()<span class="op">;</span></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> polylines <span class="op">=</span> svg</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">append</span>(<span class="st">"g"</span>)</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="st">"none"</span>)</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"stroke-width"</span><span class="op">,</span> <span class="fl">1.5</span>)</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"stroke-opacity"</span><span class="op">,</span> <span class="fl">0.4</span>)</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">selectAll</span>(<span class="st">"path"</span>)</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">data</span>(data)</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">join</span>(<span class="st">"path"</span>)  </span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>    <span class="co">//paint the polylines</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>    <span class="co">//https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix</span></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"stroke"</span><span class="op">,</span> d <span class="kw">=&gt;</span> <span class="fu">color</span>(d[colorAttribute]))</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>    <span class="co">//set the lines</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>    <span class="co">//https://observablehq.com/@d3/parallel-coordinates</span></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"d"</span><span class="op">,</span> d <span class="kw">=&gt;</span> d3<span class="op">.</span><span class="fu">line</span>()</span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">defined</span>(([<span class="op">,</span> value]) <span class="kw">=&gt;</span> value <span class="op">!=</span> <span class="kw">null</span>)</span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">y</span>(([key<span class="op">,</span> value]) <span class="kw">=&gt;</span> y<span class="op">.</span><span class="fu">get</span>(key)(value))</span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">x</span>(([key]) <span class="kw">=&gt;</span> <span class="fu">x</span>(key))</span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>        (d3<span class="op">.</span><span class="fu">cross</span>(attributes<span class="op">,</span> [d]<span class="op">,</span> (key<span class="op">,</span> d) <span class="kw">=&gt;</span> [key<span class="op">,</span> d[key]])))<span class="op">;</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>  <span class="co">// create the group nodes for the axes</span></span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> axes <span class="op">=</span> svg</span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">append</span>(<span class="st">"g"</span>)</span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">selectAll</span>(<span class="st">"g"</span>)</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">data</span>(attributes)</span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">join</span>(<span class="st">"g"</span>)    </span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">"transform"</span><span class="op">,</span> d <span class="kw">=&gt;</span> <span class="vs">`translate(</span><span class="sc">${</span><span class="fu">x</span>(d)<span class="sc">}</span><span class="vs">,0)`</span>)</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>    <span class="co">//https://observablehq.com/@d3/parallel-coordinates</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>    <span class="co">//set axis to the right and set the text</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">each</span>(<span class="kw">function</span>(d) { d3<span class="op">.</span><span class="fu">select</span>(<span class="kw">this</span>)<span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisRight</span>(y<span class="op">.</span><span class="fu">get</span>(d)))<span class="op">;</span> })</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">call</span>(g <span class="kw">=&gt;</span> g<span class="op">.</span><span class="fu">append</span>(<span class="st">"text"</span>)</span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>        <span class="co">//position of the text </span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="fl">7.5</span>)</span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">attr</span>(<span class="st">"text-anchor"</span><span class="op">,</span> <span class="st">"start"</span>)</span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="st">"currentColor"</span>)</span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>        <span class="co">//.get(d) gets the short name (value) from the Map shortAttributeNames</span></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">text</span>(d <span class="kw">=&gt;</span> shortAttributeNames<span class="op">.</span><span class="fu">get</span>(d)))<span class="op">;</span></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">updateBrushing</span>() {    </span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> number_brushes <span class="op">=</span> activeBrushes<span class="op">.</span><span class="at">size</span><span class="op">;</span></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (number_brushes <span class="op">==</span> <span class="dv">0</span>) {</span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>      <span class="co">//false is colored, true is hidden</span></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>      polylines<span class="op">.</span><span class="fu">classed</span>(<span class="st">"hidden"</span><span class="op">,</span> d <span class="kw">=&gt;</span> {<span class="cf">return</span> <span class="kw">false</span>})<span class="op">;</span></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>      polylines<span class="op">.</span><span class="fu">classed</span>(<span class="st">"hidden"</span><span class="op">,</span> d <span class="kw">=&gt;</span> {</span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>        <span class="kw">var</span> return_value <span class="op">=</span> <span class="kw">false</span><span class="op">;</span> </span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>        <span class="co">//iterate over Map and get y-values</span></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>        activeBrushes<span class="op">.</span><span class="fu">forEach</span>((value<span class="op">,</span> key) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>          <span class="kw">var</span> y0 <span class="op">=</span> value[<span class="dv">0</span>]<span class="op">;</span> </span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>          <span class="kw">var</span> y1 <span class="op">=</span> value[<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>          <span class="co">//check if car value is inside an active brush</span></span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>          <span class="kw">var</span> value_y <span class="op">=</span> y<span class="op">.</span><span class="fu">get</span>(key)(d[key])<span class="op">;</span></span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (value_y <span class="op">&lt;=</span> y1 <span class="op">&amp;&amp;</span> value_y <span class="op">&gt;=</span> y0) {</span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>          } </span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>          <span class="cf">else</span> {</span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>              return_value<span class="op">=</span><span class="kw">true</span><span class="op">;</span></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>          }   </span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>        <span class="co">//variable to see the active polylines in this scope</span></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> return_value<span class="op">;</span></span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>     })<span class="op">;</span></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a>    }                       </span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">brushed</span>(attribute) {</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a>    activeBrushes<span class="op">.</span><span class="fu">set</span>(attribute<span class="op">,</span> d3<span class="op">.</span><span class="at">event</span><span class="op">.</span><span class="at">selection</span>)<span class="op">;</span></span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateBrushing</span>()<span class="op">;</span></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">brushEnd</span>(attribute) {</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (d3<span class="op">.</span><span class="at">event</span><span class="op">.</span><span class="at">selection</span> <span class="op">!==</span> <span class="kw">null</span>) <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>    activeBrushes<span class="op">.</span><span class="fu">delete</span>(attribute)<span class="op">;</span></span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updateBrushing</span>()<span class="op">;</span></span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> brushes <span class="op">=</span> axes<span class="op">.</span><span class="fu">append</span>(<span class="st">"g"</span>)<span class="op">.</span><span class="fu">call</span>(</span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>    d3</span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">brushY</span>()</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">extent</span>([[<span class="op">-</span><span class="dv">10</span><span class="op">,</span> margin<span class="op">.</span><span class="at">top</span>]<span class="op">,</span> [<span class="dv">10</span><span class="op">,</span> height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span>]])</span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">on</span>(<span class="st">"brush"</span><span class="op">,</span> brushed)</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">on</span>(<span class="st">"end"</span><span class="op">,</span> brushEnd)</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> svg<span class="op">.</span><span class="fu">node</span>()<span class="op">;</span></span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> <span class="dv">1500</span></span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a>margin <span class="op">=</span> ({ <span class="dt">top</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">10</span> })</span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> d3<span class="op">.</span><span class="fu">csvParse</span>(<span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"cars.csv"</span>)<span class="op">.</span><span class="fu">text</span>()<span class="op">,</span> d3<span class="op">.</span><span class="at">autoType</span>)</span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a>attributes <span class="op">=</span> data<span class="op">.</span><span class="at">columns</span><span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d <span class="op">!==</span> <span class="st">"name"</span>)</span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a>shortAttributeNames <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>(</span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Object</span><span class="op">.</span><span class="fu">entries</span>({</span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a>    <span class="dt">mpg</span><span class="op">:</span> <span class="st">"MPG"</span><span class="op">,</span></span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a>    <span class="dt">cylinders</span><span class="op">:</span> <span class="st">"CYL"</span><span class="op">,</span></span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a>    <span class="dt">displacement</span><span class="op">:</span> <span class="st">"DPL"</span><span class="op">,</span></span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>    <span class="dt">horsepower</span><span class="op">:</span> <span class="st">"HP"</span><span class="op">,</span></span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a>    <span class="dt">weight</span><span class="op">:</span> <span class="st">"WGT"</span><span class="op">,</span></span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>    <span class="dt">acceleration</span><span class="op">:</span> <span class="st">"ACL"</span><span class="op">,</span></span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span><span class="op">:</span> <span class="st">"YEAR"</span><span class="op">,</span></span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>    <span class="dt">origin</span><span class="op">:</span> <span class="st">"OGN"</span></span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { select } <span class="im">from</span> <span class="st">"@jashkenas/inputs"</span></span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="pp">require</span>(<span class="st">"d3@5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-8" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-9" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-10" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-11" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-12" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="fluidity-of-assignments" class="level3">
 <h3 class="anchored" data-anchor-id="fluidity-of-assignments">Fluidity of Assignments</h3>
@@ -295,6 +610,17 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+
+<script type="ojs-module-contents">
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"x = d3.scalePoint(attributes, [margin.left, width - margin.right])\n\ny = {\n  let scales = new Map();\n\n  attributes.forEach(function(attribute) {\n    //only attribute origin is ordinal data and needs a different scale\n    if (attribute == \"origin\"){\n      scales.set(\n        attribute,\n        //https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix\n        //d3.extent gets min and max value of the given attribute \n        //3 attributes for origin so axis needs to be cut in half\n        d3.scaleOrdinal().range([height - margin.bottom, height/2, margin.top])\n          .domain(d3.extent(data, item => item[attribute]))\n      );\n    } \n    else {\n      scales.set(\n        attribute,\n        //d3.extent gets min and max value of the given attribute \n        d3.scaleLinear().range([height - margin.bottom, margin.top])\n          .domain(d3.extent(data, item => item[attribute]))\n      );\n    }      \n  });\n\n  return scales;\n}\n\nviewof colorAttribute = select({\n  title: \"Color Attribute\",\n  description: \"Pick an attribute for coloring the polylines.\",\n  options: attributes,\n  value: \"origin\"\n})\n\n//https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix\ncolor = d3.scaleOrdinal(d3.schemeTableau10)\n\nparacoords = {\n  const svg = d3.create(\"svg\").attr(\"viewBox\", [0, 0, width, height]);\n\n  // set the style of hidden data items\n  svg\n    .append(\"style\")\n    .text(\"path.hidden { stroke: #000; stroke-opacity: 0.01;}\");\n\n  // a map that holds any active brush per attribute\n  let activeBrushes = new Map();\n\n  const polylines = svg\n    .append(\"g\")\n    .attr(\"fill\", \"none\")\n    .attr(\"stroke-width\", 1.5)\n    .attr(\"stroke-opacity\", 0.4)\n    .selectAll(\"path\")\n    .data(data)\n    .join(\"path\")  \n    //paint the polylines\n    //https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix\n    .attr(\"stroke\", d => color(d[colorAttribute]))\n    //set the lines\n    //https://observablehq.com/@d3/parallel-coordinates\n    .attr(\"d\", d => d3.line()\n          .defined(([, value]) => value != null)\n          .y(([key, value]) => y.get(key)(value))\n          .x(([key]) => x(key))\n        (d3.cross(attributes, [d], (key, d) => [key, d[key]])));\n\n  // create the group nodes for the axes\n  const axes = svg\n    .append(\"g\")\n    .selectAll(\"g\")\n    .data(attributes)\n    .join(\"g\")    \n    .attr(\"transform\", d => `translate(${x(d)},0)`)\n    //https://observablehq.com/@d3/parallel-coordinates\n    //set axis to the right and set the text\n    .each(function(d) { d3.select(this).call(d3.axisRight(y.get(d))); })\n    .call(g => g.append(\"text\")\n        //position of the text \n        .attr(\"x\", -1)\n        .attr(\"y\", 7.5)\n        .attr(\"text-anchor\", \"start\")\n        .attr(\"fill\", \"currentColor\")\n        //.get(d) gets the short name (value) from the Map shortAttributeNames\n        .text(d => shortAttributeNames.get(d)));\n \n\n  function updateBrushing() {    \n    var number_brushes = activeBrushes.size;\n    if (number_brushes == 0) {\n      //false is colored, true is hidden\n      polylines.classed(\"hidden\", d => {return false});\n    } \n    else {\n      polylines.classed(\"hidden\", d => {\n        var return_value = false; \n        //iterate over Map and get y-values\n        activeBrushes.forEach((value, key) => {\n          var y0 = value[0]; \n          var y1 = value[1];\n          //check if car value is inside an active brush\n          var value_y = y.get(key)(d[key]);\n          if (value_y <= y1 && value_y >= y0) {\n          } \n          else {\n              return_value=true;\n          }   \n        });\n        //variable to see the active polylines in this scope\n        return return_value;\n     });\n    }                       \n  }\n\n  function brushed(attribute) {\n    activeBrushes.set(attribute, d3.event.selection);\n    updateBrushing();\n  }\n\n  function brushEnd(attribute) {\n    if (d3.event.selection !== null) return;\n    activeBrushes.delete(attribute);\n    updateBrushing();\n  }\n\n  const brushes = axes.append(\"g\").call(\n    d3\n      .brushY()\n      .extent([[-10, margin.top], [10, height - margin.bottom]])\n      .on(\"brush\", brushed)\n      .on(\"end\", brushEnd)\n  );\n\n  return svg.node();\n}\n\n\nheight = 1500\n\nmargin = ({ top: 10, right: 30, bottom: 10, left: 10 })\n\ndata = d3.csvParse(await FileAttachment(\"cars.csv\").text(), d3.autoType)\n\nattributes = data.columns.filter(d => d !== \"name\")\n\nshortAttributeNames = new Map(\n  Object.entries({\n    mpg: \"MPG\",\n    cylinders: \"CYL\",\n    displacement: \"DPL\",\n    horsepower: \"HP\",\n    weight: \"WGT\",\n    acceleration: \"ACL\",\n    year: \"YEAR\",\n    origin: \"OGN\"\n  })\n)\n\nimport { select } from \"@jashkenas/inputs\"\n\nd3 = require(\"d3@5\")\n\n"},{"methodName":"interpretQuiet","source":"shinyInput('colorAttribute')"}]}
+</script>
+<script type="module">
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

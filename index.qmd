@@ -159,6 +159,179 @@ Some methods for matching mentees and mentors include:
 
 There are some visualizations and online tools that could use the data from option 1 to help us understand our department and our students. They also might make it easier for students to find undergraduate research mentors. They also might make our department look cool when we try to recruit students.
 
+
+
+
+```{ojs}
+x = d3.scalePoint(attributes, [margin.left, width - margin.right])
+
+y = {
+  let scales = new Map();
+
+  attributes.forEach(function(attribute) {
+    //only attribute origin is ordinal data and needs a different scale
+    if (attribute == "origin"){
+      scales.set(
+        attribute,
+        //https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix
+        //d3.extent gets min and max value of the given attribute 
+        //3 attributes for origin so axis needs to be cut in half
+        d3.scaleOrdinal().range([height - margin.bottom, height/2, margin.top])
+          .domain(d3.extent(data, item => item[attribute]))
+      );
+    } 
+    else {
+      scales.set(
+        attribute,
+        //d3.extent gets min and max value of the given attribute 
+        d3.scaleLinear().range([height - margin.bottom, margin.top])
+          .domain(d3.extent(data, item => item[attribute]))
+      );
+    }      
+  });
+
+  return scales;
+}
+
+viewof colorAttribute = select({
+  title: "Color Attribute",
+  description: "Pick an attribute for coloring the polylines.",
+  options: attributes,
+  value: "origin"
+})
+
+//https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix
+color = d3.scaleOrdinal(d3.schemeTableau10)
+
+paracoords = {
+  const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]);
+
+  // set the style of hidden data items
+  svg
+    .append("style")
+    .text("path.hidden { stroke: #000; stroke-opacity: 0.01;}");
+
+  // a map that holds any active brush per attribute
+  let activeBrushes = new Map();
+
+  const polylines = svg
+    .append("g")
+    .attr("fill", "none")
+    .attr("stroke-width", 1.5)
+    .attr("stroke-opacity", 0.4)
+    .selectAll("path")
+    .data(data)
+    .join("path")  
+    //paint the polylines
+    //https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix
+    .attr("stroke", d => color(d[colorAttribute]))
+    //set the lines
+    //https://observablehq.com/@d3/parallel-coordinates
+    .attr("d", d => d3.line()
+          .defined(([, value]) => value != null)
+          .y(([key, value]) => y.get(key)(value))
+          .x(([key]) => x(key))
+        (d3.cross(attributes, [d], (key, d) => [key, d[key]])));
+
+  // create the group nodes for the axes
+  const axes = svg
+    .append("g")
+    .selectAll("g")
+    .data(attributes)
+    .join("g")    
+    .attr("transform", d => `translate(${x(d)},0)`)
+    //https://observablehq.com/@d3/parallel-coordinates
+    //set axis to the right and set the text
+    .each(function(d) { d3.select(this).call(d3.axisRight(y.get(d))); })
+    .call(g => g.append("text")
+        //position of the text 
+        .attr("x", -1)
+        .attr("y", 7.5)
+        .attr("text-anchor", "start")
+        .attr("fill", "currentColor")
+        //.get(d) gets the short name (value) from the Map shortAttributeNames
+        .text(d => shortAttributeNames.get(d)));
+ 
+
+  function updateBrushing() {    
+    var number_brushes = activeBrushes.size;
+    if (number_brushes == 0) {
+      //false is colored, true is hidden
+      polylines.classed("hidden", d => {return false});
+    } 
+    else {
+      polylines.classed("hidden", d => {
+        var return_value = false; 
+        //iterate over Map and get y-values
+        activeBrushes.forEach((value, key) => {
+          var y0 = value[0]; 
+          var y1 = value[1];
+          //check if car value is inside an active brush
+          var value_y = y.get(key)(d[key]);
+          if (value_y <= y1 && value_y >= y0) {
+          } 
+          else {
+              return_value=true;
+          }   
+        });
+        //variable to see the active polylines in this scope
+        return return_value;
+     });
+    }                       
+  }
+
+  function brushed(attribute) {
+    activeBrushes.set(attribute, d3.event.selection);
+    updateBrushing();
+  }
+
+  function brushEnd(attribute) {
+    if (d3.event.selection !== null) return;
+    activeBrushes.delete(attribute);
+    updateBrushing();
+  }
+
+  const brushes = axes.append("g").call(
+    d3
+      .brushY()
+      .extent([[-10, margin.top], [10, height - margin.bottom]])
+      .on("brush", brushed)
+      .on("end", brushEnd)
+  );
+
+  return svg.node();
+}
+
+
+height = 1500
+
+margin = ({ top: 10, right: 30, bottom: 10, left: 10 })
+
+data = d3.csvParse(await FileAttachment("cars.csv").text(), d3.autoType)
+
+attributes = data.columns.filter(d => d !== "name")
+
+shortAttributeNames = new Map(
+  Object.entries({
+    mpg: "MPG",
+    cylinders: "CYL",
+    displacement: "DPL",
+    horsepower: "HP",
+    weight: "WGT",
+    acceleration: "ACL",
+    year: "YEAR",
+    origin: "OGN"
+  })
+)
+
+import { select } from "@jashkenas/inputs"
+
+d3 = require("d3@5")
+
+```
+
+
+
 ### Fluidity of Assignments
 
 One suggestion that came up in almost every faculty interview was the notion of mentees changing mentors. For example, when a student joins a lab for undergraduate research, it is very likely that the supervising research mentor would become the assigned mentor. When a student discovers their passion and changes their career plans, they should be able to look for a mentor that can help them achieve their new goals.
