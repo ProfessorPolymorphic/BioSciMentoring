@@ -1,0 +1,192 @@
+---
+website:
+  title: "BIOLOGICAL SCIENCES // MENTORING"
+  comments:
+    utterances:
+      repo: quarto-dev/quarto-web
+---
+
+## SUMMARY
+
+The Department of Biological Sciences is considering a new system for advising and mentoring of undergraduate students. Under the new system, advising functions would be performed by full time professional staff. Mentoring of students would be performed by department faculty. The purpose of this document is to outline the goals, structure, and requirements of the new mentoring system.
+
+## PROGRAM GOALS
+
+1.  Promote students' intellectual independence and curiosity.
+2.  Foster students' ability to make academic, research, and career decisions.
+3.  Help students clarify their career goals.
+4.  Promote students' sense of belonging as a member of a community of scholars in the department and college.
+5.  Help students build confidence.
+
+## PROGRAM STRUCTURE
+
+### First Year Experience Course
+
+We are currently considering a 1 credit course required of all our majors. The course would be taught by Dr. Miura. The structure and content of the course are still unknown. The options for structure and content, and their associated pros and cons are listed below.
+
+#### Course Structure
+
+::: panel-tabset
+## Sections?
+
+One big section? Subgroups? By Major?
+
+## Timing?
+
+Timing (does this occur before assignment?)
+
+## Transfers
+
+Changing majors? Waive?
+:::
+
+#### Course Content
+
+Faculty presentations. Beware the boring research lecture! Perhaps include material on career path. Other presentations (undergrad researchers, grad students, campus resources, etc)
+
+Required
+
+Substantive outreach experiences from the department? Interaction to build cohort bonding Attend a certain number of College events. Hogwarts style houses within the class.
+
+## MENTOR ASSIGNMENT
+
+### How many students?
+
+Below are the enrollment data for the five degrees offered in the Department of Biological Sciences. Note that these data include double majors, and so might not be a completely accurate estimate of the number of unique students requiring a mentor.
+
+```{r echo=FALSE, warning = FALSE, output = FALSE}
+
+
+
+library(ggplot2)
+library(tidyverse)
+#install.packages("devtools")
+#devtools::install_github("jaredhuling/jcolors")
+library(jcolors)
+#devtools::install_github('Mikata-Project/ggthemr')
+library(ggthemr)
+ggthemr('solarized')
+#devtools::install_github('bbc/bbplot')
+library(bbplot)
+
+enroll <- read.csv("TidyEnrollment.csv")
+enroll$Class <- factor(enroll$Class, levels=c('Senior', 'Junior', 'Sophomore', 'Freshman'))
+enroll$alpha[enroll$Class=="Freshman"]<-0.25
+enroll$alpha[enroll$Class=="Sophomore"]<-0.5
+enroll$alpha[enroll$Class=="Junior"]<-0.75
+enroll$alpha[enroll$Class=="Senior"]<-1
+enroll$Year <- enroll$Year-2000
+
+tots <- enroll %>% group_by(Year) %>% summarise(tot = sum(Enrollment))
+
+
+majors <- enroll %>% group_by(Degree, Year) %>% summarise(tot = sum(Enrollment))
+
+
+barrie <- jcolors('pal2')
+
+```
+
+```{r echo=FALSE, warning = FALSE}
+#| label: enrollment data
+#| fig-cap: "**Enrollment data for the Department of Biological Sciences.**"
+#| fig-subcap:
+#|   - "Enrollment by Degree, Year, and Class"
+#|   - "Total Department Enrollment"
+#| layout-ncol: 2
+#| column: page
+
+ggplot(data = enroll, aes(x=Year, y= Enrollment, fill = Degree, alpha = Class))+
+  geom_bar(position = 'stack', stat = "identity")+
+  facet_grid(~Degree)+
+  scale_alpha_ordinal(range = c(1, 0.25))+
+  geom_text(
+    aes(label = after_stat(y), group = Degree), 
+    stat = 'summary', fun = sum, vjust = -1, size = 3
+  )
+
+
+
+ggplot(data = majors, aes(x=Year, y= tot, fill = Degree))+
+  geom_bar(stat = "identity")+
+  ylab("Total Enrollment")+
+  geom_text(
+    aes(label = after_stat(y), group = Year), 
+    stat = 'summary', fun = sum, vjust = -1, size = 3
+  )
+  
+Total2022 <- subset(tots, Year == 22)
+Med2022 <- subset(majors, Year == 22 & Degree == "Medical Sciences")
+
+```
+
+There are two primary take home messages:
+
+First, we have **`r Total2022$tot`** students within across our majors who will be assigned to mentors.
+
+Second, more than half of those students (**`r Med2022$tot`**) are Medical Science majors.
+
+### How many faculty?
+
+There are 30 faculty listed on our [faculty web page](https://www.uidaho.edu/sci/biology/people/faculty). If we assume each faculty member is assigned an equal number of mentees, we get `r as.integer(Total2022$tot/30)` mentees per faculty.
+
+Of course, our assumption of equal assignment across faculty isn't really feasible for many good reasons. We should probably remove the following faculty from our list of eligblie mentors:
+
+1.  Ginger Carney is pretty busy being Dean of the College of Science.
+2.  Lisa Bird, Mary Oswald, and Candi Heimgartner are Senior Intstructors who do not normally advise students.
+3.  Nicole Grieshaber is research faculty.
+4.  Larry Forney and Eva Top have emeritus appointments.
+
+This brings us down to 23 eligible faculty with about `r as.integer(Total2022$tot/23)` mentees each.
+
+In addition, I am not sure about the following faculty members' potential roles in the mentoring program:
+
+1.  Shirley Luckhart has a joint appointment in CALS and her mentoring effort might be deployed there.
+2.  Tanya Miura is department chair and is also slated to teach the freshman experience course.
+3.  Jim Bull and Holly Wichman may have partial appointments?
+
+This gets us to somewhere between 19 and 23 eligible mentors, meaning we should plan for between `r as.integer(Total2022$tot/23)` and `r as.integer(Total2022$tot/19)` per faculty member.
+
+### Options for matching
+
+How will mentees be assigned to mentors? When they were advisees, it was largely an *ad hoc* system shaped somewhat by the student's major. All of us had a mixture of advisees that aspired to careers as health professionals, researchers, technicians, and ... undefined ...
+
+Now, more than half of our students are Medical Science majors.
+
+Some methods for matching mentees and mentors include:
+
+1.  Surveys and Clustering. Collect survey data from students and faculty about their academic/research interests. Use these data to cluster people into groups. Then use this information to guide (loosely or definitively) the matching process. Collecting this survey information from students would likely have other interesting applications. Obvious drawbacks include the amount of work to create and analyze the survey and controlling the response rate.
+2.  First come - First served. Allow students to sign up for the mentor of their choice. Establish a cap for each mentor. I don't see many advantages to this system. Disadvantages include the amount of work to set up the sign up system and the "competence penalty" imposed on the faculty that have somehow resonated with lots of students.\
+3.  Random. Almost no work. Sometimes the simplest choice makes a lot of sense...
+4.  Ranked Choice. This could be combined with option 1, but is probably a fair amount of work to set up.
+
+There are some visualizations and online tools that could use the data from option 1 to help us understand our department and our students. They also might make it easier for students to find undergraduate research mentors. They also might make our department look cool when we try to recruit students.
+
+### Fluidity of Assignments
+
+One suggestion that came up in almost every faculty interview was the notion of mentees changing mentors. For example, when a student joins a lab for undergraduate research, it is very likely that the supervising research mentor would become the assigned mentor. When a student discovers their passion and changes their career plans, they should be able to look for a mentor that can help them achieve their new goals.
+
+## ROLES AND RESPONSIBILITIES
+
+### Mentors
+
+One of the key program components we have yet to define is the set of minimum requirements for the mentors. Some important unanswered questions include:
+
+1.  How many hours per week is "mentoring"? This has always varied across faculty, and always will. Nevertheless, is there a minimum expectation?
+2.  Does everyone have to do the same thing? After the freshman experience class, can each mentor establish their own approach / schedule / requirements?\
+3.  Required vs Optional? Are meetings required? How often? How is this enforced? If they are not required, are we reaching the students that really need the help?
+4.  How is it tracked? Once things are required, then they need to be tracked. Who will do this? How will they do it?
+5.  Accountability? Assessment? How do we know if the program is working? How do we know if mentors are meeting expectations? If some are not performing, is there any mechanism for accountability?
+6.  "Credit"? How is this refelected in the position description? Is this system another unfunded mandate?
+
+### Mentees
+
+Mentoring works best when both parties are engaged. How do we incentivize mentee engagement? What are we asking mentees to do as part of this process?
+
+1.  Do they have to show up or engage? The students who aren't engaged are the ones with the biggest retention problems (... he asserted without evidence...)
+2.  Clarify goals: explain to your mentor what you want from your career, and from the mentoring program.
+3.  Come prepared: set up an agenda ahead of meetings and give your mentor enough time in advance to review any materials.
+4.  Is it the student's responsibility to keep the relationship going?
+5.  Respect boundaries. Create upfront agreements about what to do if time-sensitive issues arise outside your organized meetings.
+6.  Take action between sessions.
+7.  Provide feedback.
