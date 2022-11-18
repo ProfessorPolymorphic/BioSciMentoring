@@ -163,6 +163,15 @@ There are some visualizations and online tools that could use the data from opti
 
 
 ```{ojs}
+
+html`<style>
+  text {
+    fill : black;
+    font-size : 22px;
+}
+  </style>`
+  
+
 x = d3.scalePoint(attributes, [margin.left, width - margin.right])
 
 y = {
@@ -170,13 +179,33 @@ y = {
 
   attributes.forEach(function(attribute) {
     //only attribute origin is ordinal data and needs a different scale
-    if (attribute == "origin"){
+    if (attribute == "FACULTY"){
       scales.set(
         attribute,
         //https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix
         //d3.extent gets min and max value of the given attribute 
         //3 attributes for origin so axis needs to be cut in half
-        d3.scaleOrdinal().range([height - margin.bottom, height/2, margin.top])
+        d3.scaleOrdinal().range([height - margin.bottom, 690,
+658,
+626,
+594,
+562,
+530,
+498,
+466,
+434,
+402,
+370,
+338,
+306,
+274,
+242,
+210,
+178,
+146,
+114,
+82,
+         margin.top])
           .domain(d3.extent(data, item => item[attribute]))
       );
     } 
@@ -246,7 +275,7 @@ paracoords = {
     .call(g => g.append("text")
         //position of the text 
         .attr("x", -1)
-        .attr("y", 7.5)
+        .attr("y", 15)
         .attr("text-anchor", "start")
         .attr("fill", "currentColor")
         //.get(d) gets the short name (value) from the Map shortAttributeNames
@@ -303,24 +332,25 @@ paracoords = {
 }
 
 
-height = 1500
+height = 800
 
-margin = ({ top: 10, right: 30, bottom: 10, left: 10 })
 
-data = d3.csvParse(await FileAttachment("cars.csv").text(), d3.autoType)
+margin = ({ top: 50, right: 50, bottom: 50, left: 50 })
+
+data = d3.csvParse(await FileAttachment("Mentors.csv").text(), d3.autoType)
 
 attributes = data.columns.filter(d => d !== "name")
 
 shortAttributeNames = new Map(
   Object.entries({
-    mpg: "MPG",
-    cylinders: "CYL",
-    displacement: "DPL",
-    horsepower: "HP",
-    weight: "WGT",
-    acceleration: "ACL",
-    year: "YEAR",
-    origin: "OGN"
+    FACULTY: "FACULTY",
+    BIOL: "BIO",
+    MEDSCI: "MED",
+    MICRO: "MIC",
+    BIOCH: "BCH",
+    MBB: "MBB",
+    INDUSTRY: "IND",
+    FRIENDLY: "NICE"
   })
 )
 
