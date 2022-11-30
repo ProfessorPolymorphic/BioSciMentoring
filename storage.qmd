@@ -112,3 +112,9 @@ d3 = require("d3@6")
 import {legend as Legend} from "@d3/color-legend"
 
 ```
+
+
+[height - margin.bottom, height/25, height/20, height/10, height*3/20, height/5,
+        height/4, height*6/20, height*7/20, height*8/20, height*9/20, height/2,
+        height*11/20, height*12/20, height*13/20, height*14/20, height*15/20, height*16/20,
+        height*17/20, height*18/20, height*19/20, margin.top]

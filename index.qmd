@@ -19,31 +19,37 @@ The Department of Biological Sciences is considering a new system for advising a
 
 ### First Year Experience Course
 
-We are currently considering a 1 credit course required of all our majors. The course would be taught by Dr. Miura. The structure and content of the course are still unknown. The options for structure and content, and their associated pros and cons are listed below.
+We are currently considering a 1 credit course required of all our majors. The course would be taught by Dr. Miura. The structure and content of the course are still unknown. If we assume all incoming freshmen are required to take this class in the Fall, then we must plan for an enrollment of about 95 to 110 students.
+
+
+Options and questions raised by some faculty for course structure and content are listed below.
 
 #### Course Structure
 
 ::: panel-tabset
-## Sections?
+## Sections
 
-One big section? Subgroups? By Major?
+Should the class be taught as one big section?  This would be easier on the instructor, but few speakers or topics are likely to engage the entire group.  This also makes peer engagement more challenging.  Several faculty suggested sub-groups or multiple sections (by interest, by major, etc) but this is logistically challenging.  
 
-## Timing?
+## Timing
 
-Timing (does this occur before assignment?)
+Assuming the course is required in Fall, would it also be used to inform our assignment of mentors to faculty?  It would be a good vehicle for surveys to learn about the students.
 
 ## Transfers
 
-Changing majors? Waive?
+Several faculty brought up the issue of students who change majors into one of our degrees, or transfer in after Freshman year.  Do we then waive this requirement for them?  
+
+## Faculty Presentations
+
+One goal is to introduce the students to the faculty.  However, beware the boring research lecture! Perhaps include material on career path?   
+
+## Other Content
+
+Other presentations (undergrad researchers, grad students, campus resources, etc)
+
+Substantive outreach experiences from the department? Interaction to build cohort bonding. Attend a certain number of College events. 
+
 :::
-
-#### Course Content
-
-Faculty presentations. Beware the boring research lecture! Perhaps include material on career path. Other presentations (undergrad researchers, grad students, campus resources, etc)
-
-Required
-
-Substantive outreach experiences from the department? Interaction to build cohort bonding Attend a certain number of College events. Hogwarts style houses within the class.
 
 ## MENTOR ASSIGNMENT
 
@@ -99,7 +105,7 @@ ggplot(data = enroll, aes(x=Year, y= Enrollment, fill = Degree, alpha = Class))+
   scale_alpha_ordinal(range = c(1, 0.25))+
   geom_text(
     aes(label = after_stat(y), group = Degree), 
-    stat = 'summary', fun = sum, vjust = -1, size = 3
+    stat = 'summary', fun = sum, vjust = -1, size = 2
   )
 
 
@@ -142,7 +148,7 @@ In addition, I am not sure about the following faculty members' potential roles 
 2.  Tanya Miura is department chair and is also slated to teach the freshman experience course.
 3.  Jim Bull and Holly Wichman may have partial appointments?
 
-This gets us to somewhere between 19 and 23 eligible mentors, meaning we should plan for between `r as.integer(Total2022$tot/23)` and `r as.integer(Total2022$tot/19)` per faculty member.
+This gets us to somewhere between 19 and 23 eligible mentors, meaning we should plan for between **`r as.integer(Total2022$tot/23)`** and **`r as.integer(Total2022$tot/19)`** per faculty member.
 
 ### Options for matching
 
@@ -152,18 +158,23 @@ Now, more than half of our students are Medical Science majors.
 
 Some methods for matching mentees and mentors include:
 
-1.  Surveys and Clustering. Collect survey data from students and faculty about their academic/research interests. Use these data to cluster people into groups. Then use this information to guide (loosely or definitively) the matching process. Collecting this survey information from students would likely have other interesting applications. Obvious drawbacks include the amount of work to create and analyze the survey and controlling the response rate.
-2.  First come - First served. Allow students to sign up for the mentor of their choice. Establish a cap for each mentor. I don't see many advantages to this system. Disadvantages include the amount of work to set up the sign up system and the "competence penalty" imposed on the faculty that have somehow resonated with lots of students.\
-3.  Random. Almost no work. Sometimes the simplest choice makes a lot of sense...
-4.  Ranked Choice. This could be combined with option 1, but is probably a fair amount of work to set up.
+**1.  Surveys and Clustering.** Collect survey data from students and faculty about their academic/research interests. Use these data to cluster people into groups. Then use this information to guide (loosely or definitively) the matching process. Collecting this survey information from students would likely have other interesting applications. Obvious drawbacks include the amount of work to create and analyze the survey and controlling the response rate.
+
+**2.  First come - First served.** Allow students to sign up for the mentor of their choice. Establish a cap for each mentor. I don't see many advantages to this system. Disadvantages include the amount of work to set up the sign up system and the "competence penalty" imposed on the faculty that have somehow resonated with lots of students.
+
+**3.  Random.** Almost no work. Sometimes the simplest choice makes a lot of sense...
+
+**4.  Ranked Choice.** This could be combined with option 1, but is probably a fair amount of work to set up.
 
 There are some visualizations and online tools that could use the data from option 1 to help us understand our department and our students. They also might make it easier for students to find undergraduate research mentors. They also might make our department look cool when we try to recruit students.
 
+This is a "brushable" plot I've been playing with that can be used to isolate faculty based on student declared preferences.  I obviously made up these data, but something similar might help students quickly zero in on faculty that are most closely aligned with whatever criteria they deem important.
 
+Just use the mouse to select a range on one of the axes to see it in action.  For example, try "brushing" with a click and drag on the BIO axis from 8.0 to 5.5 .
 
 
 ```{ojs}
-
+//| echo: false
 html`<style>
   text {
     fill : black;
@@ -246,7 +257,7 @@ paracoords = {
   const polylines = svg
     .append("g")
     .attr("fill", "none")
-    .attr("stroke-width", 1.5)
+    .attr("stroke-width", 2.5)
     .attr("stroke-opacity", 0.4)
     .selectAll("path")
     .data(data)
