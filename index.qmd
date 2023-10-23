@@ -1,61 +1,78 @@
 ---
 title: "BIOLOGICAL SCIENCES // MENTORING"
-  
 ---
 
-## SUMMARY
+**This content is a [DRAFT]{.red}**
+
+`Updated 10/21/2023`
+
+# SUMMARY
 
 The Department of Biological Sciences is considering a new system for advising and mentoring of undergraduate students. Under the new system, advising functions would be performed by full time professional staff. Mentoring of students would be performed by department faculty. The purpose of this document is to outline the goals, structure, and requirements of the new mentoring system.
 
-## PROGRAM GOALS
+# PROGRAM GOALS
 
 1.  Promote students' intellectual independence and curiosity.
 2.  Foster students' ability to make academic, research, and career decisions.
 3.  Help students clarify their career goals.
 4.  Promote students' sense of belonging as a member of a community of scholars in the department and college.
-5.  Help students build confidence.
+5.  Help students build confidence, resiliency, and adaptability.
 
-## PROGRAM STRUCTURE
+# PROGRAM STRUCTURE
 
-### First Year Experience Course
+## First Year Experience Course
+
+::: callout-note
+## Spring 2023
 
 We are currently considering a 1 credit course required of all our majors. The course would be taught by Dr. Miura. The structure and content of the course are still unknown. If we assume all incoming freshmen are required to take this class in the Fall, then we must plan for an enrollment of about 95 to 110 students.
+:::
 
+[CURRENT STATUS:]{.red} As of Fall 2023, Bio 101 is ongoing with two sections.
 
 Options and questions raised by some faculty for course structure and content are listed below.
 
-#### Course Structure
+### Course Structure
 
 ::: panel-tabset
 ## Sections
 
-Should the class be taught as one big section?  This would be easier on the instructor, but few speakers or topics are likely to engage the entire group.  This also makes peer engagement more challenging.  Several faculty suggested sub-groups or multiple sections (by interest, by major, etc) but this is logistically challenging.  
+Should the class be taught as one big section? This would be easier on the instructor, but few speakers or topics are likely to engage the entire group. This also makes peer engagement more challenging. Several faculty suggested sub-groups or multiple sections (by interest, by major, etc) but this is logistically challenging.
+
+[CURRENT STATUS:]{.red} The class has two sections.
 
 ## Timing
 
-Assuming the course is required in Fall, would it also be used to inform our assignment of mentors to faculty?  It would be a good vehicle for surveys to learn about the students.
+Assuming the course is required in Fall, would it also be used to inform our assignment of mentors to faculty? It would be a good vehicle for surveys to learn about the students.
+
+[CURRENT STATUS:]{.red} The class is being deployed in this way, and surveys are planned.
 
 ## Transfers
 
-Several faculty brought up the issue of students who change majors into one of our degrees, or transfer in after Freshman year.  Do we then waive this requirement for them?  
+Several faculty brought up the issue of students who change majors into one of our degrees, or transfer in after Freshman year. Do we then waive this requirement for them?
+
+[CURRENT STATUS:]{.red} Dunno.
 
 ## Faculty Presentations
 
-One goal is to introduce the students to the faculty.  However, beware the boring research lecture! Perhaps include material on career path?   
+One goal is to introduce the students to the faculty. However, beware the boring research lecture! Perhaps include material on career path?
+
+[CURRENT STATUS:]{.red} Discussions are broad. No boring research lectures.
 
 ## Other Content
 
 Other presentations (undergrad researchers, grad students, campus resources, etc)
 
-Substantive outreach experiences from the department? Interaction to build cohort bonding. Attend a certain number of College events. 
+Substantive outreach experiences from the department? Interaction to build cohort bonding. Attend a certain number of College events.
 
+[CURRENT STATUS:]{.red} These topics are being included.
 :::
 
-## MENTOR ASSIGNMENT
+# MENTOR ASSIGNMENT
 
-### How many students?
+## How many students?
 
-Below are the enrollment data for the five degrees offered in the Department of Biological Sciences. Note that these data include double majors, and so might not be a completely accurate estimate of the number of unique students requiring a mentor.
+Below are the enrollment data for the five degrees offered in the Department of Biological Sciences as of Spring 2023. Note that these data include double majors, and so might not be a completely accurate estimate of the number of unique students requiring a mentor.
 
 ```{r echo=FALSE, warning = FALSE, output = FALSE}
 
@@ -129,28 +146,28 @@ First, we have **`r Total2022$tot`** students within across our majors who will 
 
 Second, more than half of those students (**`r Med2022$tot`**) are Medical Science majors.
 
-### How many faculty?
+## How many faculty?
 
 There are 30 faculty listed on our [faculty web page](https://www.uidaho.edu/sci/biology/people/faculty). If we assume each faculty member is assigned an equal number of mentees, we get `r as.integer(Total2022$tot/30)` mentees per faculty.
 
 Of course, our assumption of equal assignment across faculty isn't really feasible for many good reasons. We should probably remove the following faculty from our list of eligblie mentors:
 
-1.  Ginger Carney is pretty busy being Dean of the College of Science.
+1.  Ginger Carney is pretty busy being Dean of the College of Science. [CURRENT STATUS:]{.red} Dr. Carney intends to mentor students.
 2.  Lisa Bird, Mary Oswald, and Candi Heimgartner are Senior Intstructors who do not normally advise students.
 3.  Nicole Grieshaber is research faculty.
 4.  Larry Forney and Eva Top have emeritus appointments.
 
-This brings us down to 23 eligible faculty with about `r as.integer(Total2022$tot/23)` mentees each.
+This brings us down to 24 eligible faculty with about `r as.integer(Total2022$tot/24)` mentees each.
 
 In addition, I am not sure about the following faculty members' potential roles in the mentoring program:
 
 1.  Shirley Luckhart has a joint appointment in CALS and her mentoring effort might be deployed there.
 2.  Tanya Miura is department chair and is also slated to teach the freshman experience course.
-3.  Jim Bull and Holly Wichman may have partial appointments?
+3.  What about faculty who may have partial appointments?
 
 This gets us to somewhere between 19 and 23 eligible mentors, meaning we should plan for between **`r as.integer(Total2022$tot/23)`** and **`r as.integer(Total2022$tot/19)`** per faculty member.
 
-### Options for matching
+## Options for matching
 
 How will mentees be assigned to mentors? When they were advisees, it was largely an *ad hoc* system shaped somewhat by the student's major. All of us had a mixture of advisees that aspired to careers as health professionals, researchers, technicians, and ... undefined ...
 
@@ -158,246 +175,141 @@ Now, more than half of our students are Medical Science majors.
 
 Some methods for matching mentees and mentors include:
 
-**1.  Surveys and Clustering.** Collect survey data from students and faculty about their academic/research interests. Use these data to cluster people into groups. Then use this information to guide (loosely or definitively) the matching process. Collecting this survey information from students would likely have other interesting applications. Obvious drawbacks include the amount of work to create and analyze the survey and controlling the response rate.
+**1. Surveys and Clustering.** Collect survey data from students and faculty about their academic/research interests. Use these data to cluster people into groups. Then use this information to guide (loosely or definitively) the matching process. Collecting this survey information from students would likely have other interesting applications. Obvious drawbacks include the amount of work to create and analyze the survey and controlling the response rate. 
 
-**2.  First come - First served.** Allow students to sign up for the mentor of their choice. Establish a cap for each mentor. I don't see many advantages to this system. Disadvantages include the amount of work to set up the sign up system and the "competence penalty" imposed on the faculty that have somehow resonated with lots of students.
+[CURRENT STATUS:]{.red} Tanya is developing a survey for Bio 101.
 
-**3.  Random.** Almost no work. Sometimes the simplest choice makes a lot of sense...
+**2. First come - First served.** Allow students to sign up for the mentor of their choice. Establish a cap for each mentor. I don't see many advantages to this system. Disadvantages include the amount of work to set up the sign up system and the "competence penalty" imposed on the faculty that have somehow resonated with lots of students.
 
-**4.  Ranked Choice.** This could be combined with option 1, but is probably a fair amount of work to set up.
+**3. Random.** Almost no work. Sometimes the simplest choice makes a lot of sense...
 
-There are some visualizations and online tools that could use the data from option 1 to help us understand our department and our students. They also might make it easier for students to find undergraduate research mentors. They also might make our department look cool when we try to recruit students.
+**4. Ranked Choice.** This could be combined with option 1, but is probably a fair amount of work to set up.
 
-This is a "brushable" plot I've been playing with that can be used to isolate faculty based on student declared preferences.  I obviously made up these data, but something similar might help students quickly zero in on faculty that are most closely aligned with whatever criteria they deem important.
-
-Just use the mouse to select a range on one of the axes to see it in action.  For example, try "brushing" with a click and drag on the BIO axis from 8.0 to 5.5 .
+[CURRENT STATUS:]{.red} The survey will include some ranking by the students.
 
 
-```{ojs}
-//| echo: false
-html`<style>
-  text {
-    fill : black;
-    font-size : 22px;
-}
-  </style>`
-  
-
-x = d3.scalePoint(attributes, [margin.left, width - margin.right])
-
-y = {
-  let scales = new Map();
-
-  attributes.forEach(function(attribute) {
-    //only attribute origin is ordinal data and needs a different scale
-    if (attribute == "FACULTY"){
-      scales.set(
-        attribute,
-        //https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix
-        //d3.extent gets min and max value of the given attribute 
-        //3 attributes for origin so axis needs to be cut in half
-        d3.scaleOrdinal().range([height - margin.bottom, 690,
-658,
-626,
-594,
-562,
-530,
-498,
-466,
-434,
-402,
-370,
-338,
-306,
-274,
-242,
-210,
-178,
-146,
-114,
-82,
-         margin.top])
-          .domain(d3.extent(data, item => item[attribute]))
-      );
-    } 
-    else {
-      scales.set(
-        attribute,
-        //d3.extent gets min and max value of the given attribute 
-        d3.scaleLinear().range([height - margin.bottom, margin.top])
-          .domain(d3.extent(data, item => item[attribute]))
-      );
-    }      
-  });
-
-  return scales;
-}
-
-viewof colorAttribute = select({
-  title: "Color Attribute",
-  description: "Pick an attribute for coloring the polylines.",
-  options: attributes,
-  value: "origin"
-})
-
-//https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix
-color = d3.scaleOrdinal(d3.schemeTableau10)
-
-paracoords = {
-  const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]);
-
-  // set the style of hidden data items
-  svg
-    .append("style")
-    .text("path.hidden { stroke: #000; stroke-opacity: 0.01;}");
-
-  // a map that holds any active brush per attribute
-  let activeBrushes = new Map();
-
-  const polylines = svg
-    .append("g")
-    .attr("fill", "none")
-    .attr("stroke-width", 2.5)
-    .attr("stroke-opacity", 0.4)
-    .selectAll("path")
-    .data(data)
-    .join("path")  
-    //paint the polylines
-    //https://observablehq.com/@sophiegri/exercise-2-scatterplot-matrix
-    .attr("stroke", d => color(d[colorAttribute]))
-    //set the lines
-    //https://observablehq.com/@d3/parallel-coordinates
-    .attr("d", d => d3.line()
-          .defined(([, value]) => value != null)
-          .y(([key, value]) => y.get(key)(value))
-          .x(([key]) => x(key))
-        (d3.cross(attributes, [d], (key, d) => [key, d[key]])));
-
-  // create the group nodes for the axes
-  const axes = svg
-    .append("g")
-    .selectAll("g")
-    .data(attributes)
-    .join("g")    
-    .attr("transform", d => `translate(${x(d)},0)`)
-    //https://observablehq.com/@d3/parallel-coordinates
-    //set axis to the right and set the text
-    .each(function(d) { d3.select(this).call(d3.axisRight(y.get(d))); })
-    .call(g => g.append("text")
-        //position of the text 
-        .attr("x", -1)
-        .attr("y", 15)
-        .attr("text-anchor", "start")
-        .attr("fill", "currentColor")
-        //.get(d) gets the short name (value) from the Map shortAttributeNames
-        .text(d => shortAttributeNames.get(d)));
- 
-
-  function updateBrushing() {    
-    var number_brushes = activeBrushes.size;
-    if (number_brushes == 0) {
-      //false is colored, true is hidden
-      polylines.classed("hidden", d => {return false});
-    } 
-    else {
-      polylines.classed("hidden", d => {
-        var return_value = false; 
-        //iterate over Map and get y-values
-        activeBrushes.forEach((value, key) => {
-          var y0 = value[0]; 
-          var y1 = value[1];
-          //check if car value is inside an active brush
-          var value_y = y.get(key)(d[key]);
-          if (value_y <= y1 && value_y >= y0) {
-          } 
-          else {
-              return_value=true;
-          }   
-        });
-        //variable to see the active polylines in this scope
-        return return_value;
-     });
-    }                       
-  }
-
-  function brushed(attribute) {
-    activeBrushes.set(attribute, d3.event.selection);
-    updateBrushing();
-  }
-
-  function brushEnd(attribute) {
-    if (d3.event.selection !== null) return;
-    activeBrushes.delete(attribute);
-    updateBrushing();
-  }
-
-  const brushes = axes.append("g").call(
-    d3
-      .brushY()
-      .extent([[-10, margin.top], [10, height - margin.bottom]])
-      .on("brush", brushed)
-      .on("end", brushEnd)
-  );
-
-  return svg.node();
-}
-
-
-height = 800
-
-
-margin = ({ top: 50, right: 50, bottom: 50, left: 50 })
-
-data = d3.csvParse(await FileAttachment("Mentors.csv").text(), d3.autoType)
-
-attributes = data.columns.filter(d => d !== "name")
-
-shortAttributeNames = new Map(
-  Object.entries({
-    FACULTY: "FACULTY",
-    BIOL: "BIO",
-    MEDSCI: "MED",
-    MICRO: "MIC",
-    BIOCH: "BCH",
-    MBB: "MBB",
-    INDUSTRY: "IND",
-    FRIENDLY: "NICE"
-  })
-)
-
-import { select } from "@jashkenas/inputs"
-
-d3 = require("d3@5")
-
-```
-
-
-
-### Fluidity of Assignments
+## Fluidity of Assignments
 
 One suggestion that came up in almost every faculty interview was the notion of mentees changing mentors. For example, when a student joins a lab for undergraduate research, it is very likely that the supervising research mentor would become the assigned mentor. When a student discovers their passion and changes their career plans, they should be able to look for a mentor that can help them achieve their new goals.
 
-## ROLES AND RESPONSIBILITIES
+# ROLES AND RESPONSIBILITIES
 
-### Mentors
+## Mentors
 
 One of the key program components we have yet to define is the set of minimum requirements for the mentors. Some important unanswered questions include:
 
 1.  How many hours per week is "mentoring"? This has always varied across faculty, and always will. Nevertheless, is there a minimum expectation?
-2.  Does everyone have to do the same thing? After the freshman experience class, can each mentor establish their own approach / schedule / requirements?\
-3.  Required vs Optional? Are meetings required? How often? How is this enforced? If they are not required, are we reaching the students that really need the help?
+2.  Does everyone have to do the same thing? [NO]{.red} After the freshman experience class, can each mentor establish their own approach / schedule / requirements? [YES]{.blue}
+3.  Required vs Optional? Are meetings required? How often? [MAYBE: 1/year?]{.blue} How is this enforced? If they are not required, are we reaching the students that really need the help?
 4.  How is it tracked? Once things are required, then they need to be tracked. Who will do this? How will they do it?
 5.  Accountability? Assessment? How do we know if the program is working? How do we know if mentors are meeting expectations? If some are not performing, is there any mechanism for accountability?
-6.  "Credit"? How is this refelected in the position description? Is this system another unfunded mandate?
+6.  "Credit"? How is this reflected in the position description? Is this system another unfunded mandate?
+7. Resources? What resources would help the mentors achieve the goal of the program?
 
-### Mentees
+### DRAFT Mentor Roles and Responsibilities
 
-Mentoring works best when both parties are engaged. How do we incentivize mentee engagement? What are we asking mentees to do as part of this process?
+**The mentor should be flexible and adaptable to accomodate the unique needs and aspirations of each mentee, promoting an inclusive and supportive mentoring environment.**
 
-1.  Do they have to show up or engage? The students who aren't engaged are the ones with the biggest retention problems (... he asserted without evidence...)
-2.  Clarify goals: explain to your mentor what you want from your career, and from the mentoring program.
-3.  Come prepared: set up an agenda ahead of meetings and give your mentor enough time in advance to review any materials.
-4.  Is it the student's responsibility to keep the relationship going?
-5.  Respect boundaries. Create upfront agreements about what to do if time-sensitive issues arise outside your organized meetings.
-6.  Take action between sessions.
-7.  Provide feedback.
+1. **Orientation and Guidance:**
+   - Help students in understanding the curriculum and choosing the appropriate courses.
+   - Assist in navigating university resources and facilities.
+   - Familiarize students with the department, faculty members, and research opportunities.
+
+2. **Academic Support:**
+   - Provide advice on study strategies and time management.
+   - Assist in enhancing skills such as critical thinking, problem-solving, and writing.
+   - Direct students to academic resources such as libraries, labs, and online platforms.
+
+3. **Research Guidance:**
+   - Assist in identifying research opportunities and projects.
+   - Guide students in approaching and collaborating with potential research advisors.
+   - Provide feedback on research proposals, presentations, and reports.
+
+4. **Career Planning:**
+   - Offer insights into various career paths , including academia, industry, health care, and alternative careers.
+   - Assist in the preparation of CVs, resumes, and cover letters.
+   - Conduct mock interviews and provide feedback to prepare for job or graduate school applications.
+
+5. **Networking:**
+   - Introduce students to professionals, researchers, and alumni in their discipline.
+   - Encourage participation in seminars, workshops, and conferences.
+   - Promote engagement with professional organizations and societies.
+
+6. **Personal Development:**
+   - Support the development of soft skills such as communication, leadership, and teamwork.
+   - Encourage participation in extracurricular activities and volunteer work related to their career.
+   - Help in managing stress and maintaining a healthy work-life balance.
+
+7. **Regular Check-ins and Progress Tracking:**
+   - Schedule regular meetings to discuss academic progress, challenges, and future plans.
+   - Provide constructive feedback to help improve performance and achieve goals.
+   - Document the mentoring process and maintain a record of the mentees' achievements and areas of improvement.
+
+8. **Ethical Conduct and Professionalism:**
+   - Promote understanding and adherence to ethical guidelines in research and academic activities.
+   - Model and encourage professional behavior, respect, and integrity.
+
+9. **Feedback and Evaluation:**
+   - Collect feedback from mentees to improve the mentoring process.
+   - Conduct evaluations to assess the mentees' progress and the effectiveness of the mentoring relationship.
+
+10. **Continuous Learning and Improvement:**
+    - Stay updated with the latest developments, teaching methodologies, and best practices in STEM education and mentoring.
+    - Participate in mentor training programs to enhance mentoring skills.
+   
+
+
+
+## Mentees
+
+Mentoring works best when both parties are engaged. How do we incentivize mentee engagement? What are we asking mentees to do as part of this process? Do they have to show up or engage? The students who aren't engaged are the ones with the biggest retention problems (... he asserted without evidence...)
+
+**Mentees should be encouraged to take ownership of their learning and professional development while respecting the mentor’s time and expertise.**
+
+1. **Proactive Communication:**
+   - Initiate and maintain regular communication with the mentor.
+   - Express individual needs, goals, and challenges clearly and honestly.
+
+2. **Preparation and Participation:**
+   - Come prepared for mentoring sessions with questions, updates, and a clear agenda.
+   - Actively participate in discussions, activities, and meetings suggested by the mentor.
+
+3. **Goal Setting:**
+   - Work with the mentor to set realistic short-term and long-term goals.
+   - Regularly review and update goals based on progress and changing interests or priorities.
+
+4. **Responsiveness:**
+   - Respond to communications from the mentor in a timely manner.
+   - Be open to feedback, suggestions, and advice provided by the mentor.
+
+5. **Research Engagement:**
+   - Actively seek and participate in research opportunities.
+   - Share research progress and outcomes with the mentor for feedback and guidance.
+
+6. **Academic Commitment:**
+   - Dedicate sufficient time and effort to academic studies and research activities.
+   - Seek help from the mentor when facing academic challenges or uncertainties.
+
+7. **Networking and Professional Development:**
+   - Utilize the mentor's network to explore opportunities for internships, workshops, and seminars.
+   - Participate in networking events and professional development activities recommended by the mentor.
+
+8. **Feedback:**
+   - Provide feedback to the mentor regarding the effectiveness of the mentoring relationship and areas for improvement.
+   - Reflect on the mentoring experience and its impact on academic and personal development.
+
+9. **Ethical Conduct:**
+   - Maintain integrity and professionalism in all academic and research activities.
+   - Respect confidentiality and the boundaries of the mentor-mentee relationship.
+
+10. **Continuous Learning:**
+   - Be receptive to new ideas, approaches, and perspectives shared by the mentor.
+   - Pursue continuous learning and improvement through the mentor’s guidance and independent efforts.
+
+11. **Documentation and Record-Keeping:**
+   - Keep a record of mentoring meetings, goals, progress, and key takeaways.
+   - Document learnings, reflections, and milestones achieved during the mentoring process.
+
+
+
+
